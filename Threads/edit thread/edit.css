@@ -1,0 +1,99 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #000000;
+    max-height: 100vh;
+    max-width: 100vw;
+    overflow-y: auto;
+}
+body::-webkit-scrollbar {
+    width: 10px;
+    background: #2c2b2bc7;
+    border-radius: 20px;
+    
+  }
+
+  /* Track */
+  body::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+   
+  /* Handle */
+  body::-webkit-scrollbar-thumb {
+    background: #dadde4;
+    border-radius: 20px;
+  }
+  
+  /* Handle on hover */
+  body::-webkit-scrollbar-thumb:hover {
+    background: #ffffff; 
+  }
+ 
+
+div.heading{
+    display: flex;
+    flex-direction: row;
+justify-content:center;
+align-items:center;
+margin-top: 50px;
+}
+
+/* div.heading button{
+color: #ffffff;
+outline: none;
+border: none;
+background-color: #000000;
+font-size:xx-large;
+font-weight: lighter;
+} */
+
+div.heading h1{
+    color: #ffffff;
+    font-size:40px;
+    font-weight:bolder;
+}
+
+div.post{
+    margin-top: 20px;
+    border-top: 3px solid #2c2c2c;
+    margin-left: 10px;
+}
+div.user{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+div.start{
+    margin-top: 8px;
+}
+
+#textarea{
+    color: #ffffff;
+    outline: none;
+    border: none;
+    background-color: #2c2c2c;
+}
+#textarea::placeholder{
+    color: #ffffff;
+}
+
+ button{
+    color: rgb(3, 3, 255);
+    outline: none;
+    border: none;
+    background-color: #000000;
+    font-size: large;
+    cursor: pointer;
+    
+}
+
+
+
+
+
+
