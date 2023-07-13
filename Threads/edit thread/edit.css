@@ -80,7 +80,7 @@ div.large{
 border: 2px solid;
 width: 3.5rem;
 height: 3.5rem;
-background-color: rgb(255 255 255);
+background-color: #4c4c4c;
 border-radius: 50%;
 overflow: hidden;
 }
@@ -97,7 +97,7 @@ div.small{
     border: 2px solid;
 width: 2rem;
 height: 2rem;
-background-color: rgb(255 255 255);
+background-color: #4c4c4c;
 border-radius: 50%;
 }
 /* images */

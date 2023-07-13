@@ -93,20 +93,22 @@ window.addEventListener('scroll', function () {
 
 //  provide login user all data 
 onAuthStateChanged(auth, (user) => {
-  if (user !== null) {
-    user.providerData.forEach((profile) => {
-      console.log("Sign-in provider: " + profile.providerId);
-      console.log("  Provider-specific UID: " + profile.uid);
-      console.log("  Name: " + profile.displayName);
-      console.log("  Email: " + profile.email);
-      console.log("  Photo URL: " + profile.photoURL);
-    });
+  if (user) {
+    const profile = {
+      providerId: user.providerData[0].providerId,
+      uid: user.providerData[0].uid,
+      displayName: user.displayName || user.providerData[0].displayName || user.email,
+      email: user.providerData[0].email,
+      photoURL: user.photoURL || user.providerData[0].photoURL || '../../Assets/3d-render-cartoon-avatar-isolated_570939-71.jpg',
+    };   
+    localStorage.setItem('userProfile', JSON.stringify(profile)); // storing in local storege.
+  } else {
+    console.log("Not logged in");
   }
 });
 
 
 ///  only provide user id information 
-
 
 // onAuthStateChanged(auth, (user) => {
 //   if (user) {
@@ -140,8 +142,6 @@ signInWithPopup(auth, provider)
     const token = credential.accessToken;
     // The signed-in user info.
     const user = result.user;
-    // IdP data available using getAdditionalUserInfo(result)
-    // ...
     window.location.href = './Threads/Threads.html';
   }).catch((error) => {
     // Handle Errors here.
@@ -158,7 +158,7 @@ signInWithPopup(auth, provider)
 
 
 
-  //  for direct sigin of users who have logined before
+//   for direct sigin of users who have logined before
   document.addEventListener('DOMContentLoaded', ()=>{
     auth.onAuthStateChanged((user) => {
       if (user && user.emailVerified) {

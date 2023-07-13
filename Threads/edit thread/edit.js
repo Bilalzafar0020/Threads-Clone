@@ -69,3 +69,16 @@ textarea.style.lineHeight = '1.7'
 })
 
 
+// Retrieving the data from  local storage
+var profilePictureURL = JSON.parse(localStorage.getItem('userProfile')); //geting the key 
+
+let profilePicture = profilePictureURL.photoURL // value in a key 
+let name = profilePictureURL.displayName // value 
+
+document.getElementById('largeImage').src = profilePicture;
+
+document.getElementById('UserName').innerHTML = name;
+
+document.getElementById('smallimage').src = profilePicture;
+
+
