@@ -21,7 +21,7 @@ const firebaseConfig = {
 
   
 let retrieveData = async function() {
-  const querySnapshot = await getDocs(query(collection(db, 'post'), orderBy('timestamp', 'desc'))); //  changes here
+  const querySnapshot = await getDocs(query(collection(db, 'post'), orderBy('time', 'desc'))); //  changes here
 
   querySnapshot.forEach((docm) => {
     const postData = docm.data();

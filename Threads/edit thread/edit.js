@@ -22,15 +22,38 @@ const firebaseConfig = {
   let textarea = document.getElementById('textarea');
 
   let postButton = document.getElementById('post');
- 
-   
+
+     let placeholder = document.getElementById('StartH2');
+
+  const maxCharacters = 415;  // lenght of a input 
+  
+  textarea.addEventListener('input', () => {
+    //  for text lenght
+    if (textarea.value.length > maxCharacters) {
+      textarea.value = textarea.value.substring(0, maxCharacters); 
+    }
+
+    //  for button color
+    if (textarea.value.trim() !== '') {  // trim remove whitespaces from value of textarea if than it is not equal to empty valus than this color is user rgb(0,0,255);
+      postButton.style.color = 'rgb(0, 0, 255)';
+    } else {
+      postButton.style.color = '#284e73';
+    }
+
+// for placeholder
+  placeholder.innerText = '';
+textarea.style.lineHeight = '1.7'
+  });
+
+
+
   postButton.addEventListener('click', ()=>{
 
     let inputData = {
-        content: textarea.value
+        content: textarea.value,
+         time: serverTimestamp()
       };
-      
-console.log(inputData);
+
   addDoc(collection(db, "post"),inputData)
   .then(() => {
 
