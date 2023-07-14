@@ -19,7 +19,10 @@ const firebaseConfig = {
   const db = getFirestore(app);
 
 
-  
+  let mainDiv = document.getElementById('mainContent');
+
+
+
 let retrieveData = async function() {
   const querySnapshot = await getDocs(query(collection(db, 'post'), orderBy('time', 'desc'))); //  changes here
 
@@ -27,11 +30,147 @@ let retrieveData = async function() {
     const postData = docm.data();
     const postId = docm.id;
 
-    const content = postData.content;
-    console.log(content);
+
+ let mainPost = document.createElement('div');
+mainPost.style.width = '100%'; //90%
+mainPost.classList.add('mainPost')
+
+mainDiv.appendChild(mainPost)
+
+// pics area
+let UserProfile = document.createElement('div');
+UserProfile.classList.add('UserProfile')
+mainPost.appendChild(UserProfile)
+
+
+let largePic = document.createElement('div');
+largePic.classList.add('largePic');
+largePic.style.width = '3.5rem';
+largePic.style.height = '3.5rem';
+largePic.style.background = '#4c4c4c';
+largePic.style.borderRadius = '50%';
+// largePic.style.overflow = 'hidden';
+UserProfile.appendChild(largePic);
+
+
+let largeImg = document.createElement('img');
+largeImg.src = '../../Assets/IMG-20210924-WA0002.jpg';
+largeImg.style.width = '100%';
+largeImg.style.height = '100%';
+largeImg.style.objectFit = 'cover';
+largeImg.style.borderRadius = '50%';
+largeImg.id = 'largeImg';
+largePic.appendChild(largeImg);
+
+
+let line = document.createElement('div');
+line.style.width ='1.7px';
+line.style.background = '#4c4c4c';
+line.style.height = '13rem';
+line.style.marginTop = '10px';
+line.style.marginBottom = '10px';
+UserProfile.appendChild(line);
+
+let smallPic = document.createElement('div');
+smallPic.style.width = '2rem';
+smallPic.style.height = '2rem';
+smallPic.style.background  = '#4c4c4c';
+smallPic.style.borderRadius = '50%';
+UserProfile.appendChild(smallPic);
+
+
+let smallImg = document.createElement('img');
+smallImg.src = '';
+smallImg.style.width = '100%';
+smallImg.style.height = '100%';
+smallImg.style.objectFit = 'cover';
+smallImg.style.borderRadius = '50%';
+smallImg.id = 'smallImg';
+smallPic.appendChild(smallImg);
+
+
+// content area
+
+let mainContentDiv = document.createElement('div');
+mainContentDiv.style.marginLeft ='20px';
+mainContentDiv.style.width = '100%';
+mainPost.appendChild(mainContentDiv);
+
+
+let posterDiv = document.createElement('div');
+posterDiv.style.display = 'flex';
+posterDiv.style.flexDirection = 'row';
+posterDiv.style.justifyContent = 'space-between';
+mainContentDiv.appendChild(posterDiv);
+
+
+
+
+let userName = document.createElement('h1');
+userName.innerHTML = `Bilal Zafar <img src="../../Assets/blue1.png" style="width: 20px; height: 20px;border-radius:999px ">`;
+userName.style.letterSpacing = '1px';
+userName.style.fontSize = '23px';
+userName.style.color = '#f7ffff';
+userName.style.fontWeight = 'lighter';
+userName.style.textTransform = 'capitalize';
+userName.id = 'userName'
+posterDiv.appendChild(userName);
+
+
+
+let time = document.createElement('h2');
+time.innerHTML = '3m';
+time.style.color = '#bbb7b7';
+time.style.fontWeight = 'lighter';
+time.style.textTransform = 'capitalize';
+time.id = 'time';
+time.style.fontSize = '20px';
+posterDiv.appendChild(time);
+
+
+
+let textArea = document.createElement('textarea');
+textArea.innerText = postData.content;
+//postData.content
+textArea.style.letterSpacing = '1.5px';
+textArea.style.fontSize = '16px';
+textArea.style.color = '#f7ffff';
+textArea.style.fontWeight = 'lighter';
+textArea.style.lineHeight = '1.5';
+textArea.style.background = '#000000';
+textArea.style.border = 'none';
+textArea.style.outline = 'none';
+textArea.id = 'TextArea';
+textArea.style.marginTop = '10px';
+textArea.style.width = '100%';
+textArea.style.height = '80%';
+textArea.readOnly = true; 
+textArea.style.textTransform = 'capitalize';
+
+
+mainContentDiv.appendChild(textArea)
   });
 
   }
 
 retrieveData();
+
+
+
+
+//  Firestore listener for real-time updates
+const pollsCollectionRef = collection(db, "post");
+const unsubscribe = onSnapshot(pollsCollectionRef, (snapshot) => {
+
+  mainDiv.innerHTML = '';
+
+  retrieveData().catch((error) => {
+    console.error("Error updating polls:", error);
+  });
+});
+
+
+
+
+
 

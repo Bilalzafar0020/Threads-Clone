@@ -144,6 +144,9 @@ div.write{
     cursor: pointer;
     
 }
+button:hover{
+    transform: scale(1.1);
+}
 h1.StartH1{
     margin-top: 1px;
     letter-spacing: 1px;

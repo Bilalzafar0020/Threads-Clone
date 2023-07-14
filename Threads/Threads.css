@@ -56,10 +56,15 @@ div.secondMain{
 div.logo{
     margin-top: 8px;
 }
+
+/*  post area */
 div.content {
-    margin-top: 15px;
+    margin-top: 10px;
     min-height: calc(100vh - 3.4rem - 8px); /* Subtracting the footer and logo height from viewport height(the remaining height will be the height of the div.content */
+  width: 100%;
   }
+
+  /*  home,edit,profile area */
 div.footer{
     position: sticky;
     display: flex;
@@ -79,6 +84,37 @@ div.mainFooter{
    align-items: center;
    width: 100%;
 }
+
+
+/* /////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////    dynamically creating elements css   */
+
+/*   main area */
+div.mainPost{
+  /* margin-left: auto;
+  margin-right: auto; */
+  /* border: 2px solid red; */
+  height: 17rem;  /* 22.3rem */
+  display: flex;
+  flex-direction: row;
+  border-bottom: 2px solid #4c4c4c;
+margin-bottom: 22px;
+}
+
+/*   post area */
+div.UserProfile{
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+
+
+
 
 
 
