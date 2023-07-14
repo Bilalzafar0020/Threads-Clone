@@ -18,6 +18,42 @@ const firebaseConfig = {
   const auth = getAuth(app);
   const db = getFirestore(app);
 
+// alert message 
+function showAlert(message, type) {
+  const alertContainer = document.getElementById('alertContainer');
+
+  const alert = document.createElement('div');
+  alert.classList.add('alert');
+  alert.textContent = message;
+
+  alertContainer.appendChild(alert);
+
+  setTimeout(() => {
+    alert.classList.add('hide');
+    setTimeout(() => {
+      alert.remove();
+    }, 500);
+  }, 4000);
+}
+
+// Sticky alert   (help from chatgpt so that alert should be responsive)
+window.addEventListener('scroll', function () {
+const alertContainer = document.getElementById('alertContainer');
+const alert = alertContainer.querySelector('.alert');
+if (alert) {
+  const alertHeight = alert.offsetHeight;
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+  const windowBottom = scrollTop + windowHeight;
+
+  if (windowBottom > alertContainer.offsetTop + alertHeight) {
+    alert.classList.add('sticky');
+  } else {
+    alert.classList.remove('sticky');
+  }
+}
+});
+  
 
   let textarea = document.getElementById('textarea');
 
@@ -57,7 +93,7 @@ textarea.style.lineHeight = '1.7'
   addDoc(collection(db, "post"),inputData)
   .then(() => {
 
-    setTimeout( alert('succecful edit the data in firebase') , 4000)
+    setTimeout( alert('Posting...') , 4000)
      
 
     window.location.href = '../Threads.html';

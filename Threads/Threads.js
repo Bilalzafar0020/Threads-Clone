@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-import { getFirestore, collection, addDoc,getDocs,onSnapshot,doc,updateDoc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
-import { getAuth,signOut } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+import { getFirestore, collection, addDoc,getDocs,onSnapshot,doc,updateDoc, serverTimestamp, query, orderBy} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+import { getAuth,signOut,onAuthStateChanged  } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 import { getStorage, ref, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-storage.js";
 
   
@@ -66,20 +66,6 @@ largeImg.id = 'largeImg';
 largePic.appendChild(largeImg);
 
 
-const user = auth.currentUser;
-
-if (user) {
-  const userId = user.uid; //  the user's UID
-
-  const profilePicRef = ref(storage, `profile_pictures/${userId}`);
-  const profilePicUrl =  await getDownloadURL(profilePicRef);
-
-  largeImg.src = profilePicUrl;
-} else {
-  console.log('User is not logged in');
-}
-
-
 
 let line = document.createElement('div');
 line.style.width ='1.7px';
@@ -98,7 +84,7 @@ UserProfile.appendChild(smallPic);
 
 
 let smallImg = document.createElement('img');
-smallImg.src = '';
+// smallImg.src = '';
 smallImg.style.width = '100%';
 smallImg.style.height = '100%';
 smallImg.style.objectFit = 'cover';
@@ -106,6 +92,20 @@ smallImg.style.borderRadius = '50%';
 smallImg.id = 'smallImg';
 smallPic.appendChild(smallImg);
 
+
+const user = auth.currentUser;
+
+if (user) {
+  const userId = user.uid; //  the user's UID
+
+  const profilePicRef = ref(storage, `profile_pictures/${userId}`);
+  const profilePicUrl =  await getDownloadURL(profilePicRef);
+
+  largeImg.src = profilePicUrl;
+  smallImg.src = profilePicUrl
+} else {
+  console.log('User is not logged in');
+}
 
 // content area
 
@@ -125,13 +125,23 @@ mainContentDiv.appendChild(posterDiv);
 
 
 let userName = document.createElement('h1');
-userName.innerHTML = `Bilal Zafar <img src="../../Assets/blue1.png" style="width: 20px; height: 20px;border-radius:999px ">`;
 userName.style.letterSpacing = '1px';
 userName.style.fontSize = '23px';
 userName.style.color = '#f7ffff';
 userName.style.fontWeight = 'lighter';
 userName.style.textTransform = 'capitalize';
-userName.id = 'userName'
+userName.classList.add('userName'); // because we can not access the id directy 
+
+
+// const user = auth.currentUser;
+    if (user) {
+      const profile = {
+        displayName: user.displayName || user.providerData[0].displayName || user.email,
+      };
+      userName.innerHTML = `${profile.displayName} <img src="../../Assets/blue1.png" style="width: 20px; height: 20px;border-radius:999px ">`;
+    }
+
+
 posterDiv.appendChild(userName);
 
 
@@ -218,8 +228,10 @@ return mainPost;  // for storage
 
   }
 
-retrieveData();
+// retrieveData();
 
+// ...
+// ...
 
 
 
