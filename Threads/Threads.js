@@ -138,7 +138,8 @@ userName.classList.add('userName'); // because we can not access the id directy
       const profile = {
         displayName: user.displayName || user.providerData[0].displayName || user.email,
       };
-      userName.innerHTML = `${profile.displayName} <img src="../../Assets/blue1.png" style="width: 20px; height: 20px;border-radius:999px ">`;
+      userName.innerHTML = `${profile.displayName} 
+      <img src="../../Assets/blue1.png" style="width: 20px; height: 20px;border-radius:999px ">`;
     }
 
 
@@ -188,25 +189,25 @@ icons.style.height = '20px';
 
 //  love icon
 let loveIcon = document.createElement('img');
-loveIcon.src = '../../Assets/heart.svg'; 
+loveIcon.src = '../Assets/heart.svg'; 
 loveIcon.style.cursor = 'pointer';
 icons.appendChild(loveIcon);
 
 // message icon
 let messageIcon = document.createElement('img');
-messageIcon.src = '../../Assets/message-circle.svg'; 
+messageIcon.src = '../Assets/message-circle.svg'; 
 messageIcon.style.cursor = 'pointer';
 icons.appendChild(messageIcon);
 
 //  recycle icon
 let recycleIcon = document.createElement('img');
-recycleIcon.src = '../../Assets/refresh-cw (1).svg'; 
+recycleIcon.src = '../Assets/refresh-cw (1).svg'; 
 recycleIcon.style.cursor = 'pointer';
 icons.appendChild(recycleIcon);
 
 //  send icon
 let sendIcon = document.createElement('img');
-sendIcon.src = '../../Assets/send.svg'; 
+sendIcon.src = '../Assets/send.svg'; 
 sendIcon.style.cursor = 'pointer';
 icons.appendChild(sendIcon);
 
