@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
 import { getFirestore, collection, addDoc,getDocs,onSnapshot,doc,updateDoc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 import { getAuth,signOut } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+import { getStorage, ref, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-storage.js";
 
   
 const firebaseConfig = {
@@ -17,6 +18,7 @@ const firebaseConfig = {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const db = getFirestore(app);
+  const storage = getStorage(app);
 
 
   let mainDiv = document.getElementById('mainContent');
@@ -26,7 +28,8 @@ const firebaseConfig = {
 let retrieveData = async function() {
   const querySnapshot = await getDocs(query(collection(db, 'post'), orderBy('time', 'desc'))); //  changes here
 
-  querySnapshot.forEach((docm) => {
+  const downloadURLPromises = querySnapshot.docs.map(async (docm) => {
+    // querySnapshot.forEach((docm) => {  first this was like that but for storge we did it
     const postData = docm.data();
     const postId = docm.id;
 
@@ -54,13 +57,28 @@ UserProfile.appendChild(largePic);
 
 
 let largeImg = document.createElement('img');
-largeImg.src = '../../Assets/IMG-20210924-WA0002.jpg';
+// largeImg.src = '../../Assets/IMG-20210924-WA0002.jpg';
 largeImg.style.width = '100%';
 largeImg.style.height = '100%';
 largeImg.style.objectFit = 'cover';
 largeImg.style.borderRadius = '50%';
 largeImg.id = 'largeImg';
 largePic.appendChild(largeImg);
+
+
+const user = auth.currentUser;
+
+if (user) {
+  const userId = user.uid; //  the user's UID
+
+  const profilePicRef = ref(storage, `profile_pictures/${userId}`);
+  const profilePicUrl =  await getDownloadURL(profilePicRef);
+
+  largeImg.src = profilePicUrl;
+} else {
+  console.log('User is not logged in');
+}
+
 
 
 let line = document.createElement('div');
@@ -143,13 +161,60 @@ textArea.style.outline = 'none';
 textArea.id = 'TextArea';
 textArea.style.marginTop = '10px';
 textArea.style.width = '100%';
-textArea.style.height = '80%';
+textArea.style.height = '67%';
 textArea.readOnly = true; 
 textArea.style.textTransform = 'capitalize';
-
-
 mainContentDiv.appendChild(textArea)
+
+
+let icons = document.createElement('div');
+icons.style.display = 'flex';
+icons.style.flexDirection = 'row';
+icons.style.justifyContent = 'space-between';
+icons.style.alignItems = 'center';
+icons.style.width = '8rem';
+icons.style.height = '20px';
+
+
+//  love icon
+let loveIcon = document.createElement('img');
+loveIcon.src = '../../Assets/heart.svg'; 
+loveIcon.style.cursor = 'pointer';
+icons.appendChild(loveIcon);
+
+// message icon
+let messageIcon = document.createElement('img');
+messageIcon.src = '../../Assets/message-circle.svg'; 
+messageIcon.style.cursor = 'pointer';
+icons.appendChild(messageIcon);
+
+//  recycle icon
+let recycleIcon = document.createElement('img');
+recycleIcon.src = '../../Assets/refresh-cw (1).svg'; 
+recycleIcon.style.cursor = 'pointer';
+icons.appendChild(recycleIcon);
+
+//  send icon
+let sendIcon = document.createElement('img');
+sendIcon.src = '../../Assets/send.svg'; 
+sendIcon.style.cursor = 'pointer';
+icons.appendChild(sendIcon);
+
+
+
+mainContentDiv.appendChild(icons)
+
+return mainPost;  // for storage
+
+
   });
+
+  const mainPosts = await Promise.all(downloadURLPromises); // for  storage
+
+  mainPosts.forEach((mainPost) => {  // for  storage
+    mainDiv.appendChild(mainPost); // for  storage
+  });
+
 
   }
 

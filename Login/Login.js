@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
   import { getAuth,signInWithEmailAndPassword,onAuthStateChanged  ,GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
-  
+  import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-storage.js";
+
   
 const firebaseConfig = {
     apiKey: "AIzaSyDuMLLXueVf4QfiFPLtjOoDAD9pAGZJtsw",
@@ -15,7 +16,8 @@ const firebaseConfig = {
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
-   
+  const storage = getStorage(app); // firebase storage 
+
   const loginForm = document.getElementById('loginForm');
   const emailInput = document.getElementById('email');
   const passwordInput = document.getElementById('password');
@@ -92,7 +94,7 @@ window.addEventListener('scroll', function () {
 
 
 //  provide login user all data 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
   if (user) {
     const profile = {
       providerId: user.providerData[0].providerId,
@@ -101,6 +103,27 @@ onAuthStateChanged(auth, (user) => {
       email: user.providerData[0].email,
       photoURL: user.photoURL || user.providerData[0].photoURL || '../../Assets/3d-render-cartoon-avatar-isolated_570939-71.jpg',
     };   
+
+// // Upload profile picture to Firebase Storage
+// const profilePicURL = profile.photoURL;
+// const profilePicRef = ref(storage, `profile_pictures/${user.uid}`);
+// const profilePicBlob = await fetch(profilePicURL).then((response) => response.blob());
+// await uploadBytes(profilePicRef, profilePicBlob);
+
+// Upload profile picture to Firebase Storage
+let profilePicURL = '../../Assets/3d-render-cartoon-avatar-isolated_570939-71.jpg'; // Default profile picture URL
+
+if (user.photoURL || user.providerData[0].photoURL) {
+  // Use the user's provided profile picture
+  profilePicURL = user.photoURL || user.providerData[0].photoURL;
+}
+
+const profilePicRef = ref(storage, `profile_pictures/${user.uid}`);
+const profilePicBlob = await fetch(profilePicURL).then((response) => response.blob());
+await uploadBytes(profilePicRef, profilePicBlob);
+
+
+
     localStorage.setItem('userProfile', JSON.stringify(profile)); // storing in local storege.
   } else {
     console.log("Not logged in");

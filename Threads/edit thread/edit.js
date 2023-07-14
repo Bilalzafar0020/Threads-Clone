@@ -25,7 +25,7 @@ const firebaseConfig = {
 
      let placeholder = document.getElementById('StartH2');
 
-  const maxCharacters = 415;  // 415 
+  const maxCharacters = 385;  // 415 
   
   textarea.addEventListener('input', () => {
     //  for text lenght
