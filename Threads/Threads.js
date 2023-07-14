@@ -138,8 +138,7 @@ userName.classList.add('userName'); // because we can not access the id directy
       const profile = {
         displayName: user.displayName || user.providerData[0].displayName || user.email,
       };
-      userName.innerHTML = `${profile.displayName} 
-      <img src="../Assets/blue1.png" style="width: 20px; height: 20px;border-radius:999px ">`;
+      userName.innerHTML = `${profile.displayName}<img src="../Assets/blue1.png" style="width: 20px; height: 20px;border-radius:999px ">`;
     }
 
 
