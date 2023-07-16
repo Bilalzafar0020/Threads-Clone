@@ -75,23 +75,64 @@ line.style.marginBottom = '10px';
 UserProfile.appendChild(line);
 
 let smallPic = document.createElement('div');
-smallPic.style.width = '2rem';
-smallPic.style.height = '2rem';
-smallPic.style.background  = '#4c4c4c';
+smallPic.style.width = '4.5rem';
+smallPic.style.height = '3rem';
+// smallPic.style.background  = '#4c4c4c';
+smallPic.style.position = 'relative';
 smallPic.style.borderRadius = '50%';
+
+
+let smallPic1 = document.createElement('div');
+smallPic1.style.width = '4.5rem';
+smallPic.style.height = '3rem';
+// smallPic.style.background  = '#4c4c4c';
+// smallPic.style.position = 'relative';
+smallPic1.style.borderRadius = '50%';
+smallPic.appendChild(smallPic1);
+
+
+
+let div2 = document.createElement('div');
+div2.style.width = '1.8rem';
+div2.style.height = '70%';
+div2.style.background = '#a78bfa';
+div2.style.position = 'absolute';
+div2.style.right = '5%';
+div2.style.bottom = '40%'
+div2.style.borderRadius = '50%';
+smallPic1.appendChild(div2);
+
+let div3 = document.createElement('div');
+div3.style.width = '1.3rem';
+div3.style.height = '50%';
+div3.style.background = '#f87171';
+div3.style.position = 'absolute';
+div3.style.left = '15%';
+div3.style.bottom = '10%'
+div3.style.borderRadius = '50%';
+div3.style.marginBottom = '15%'
+// div3.style.transform = 'translateX(-50%)';
+smallPic1.appendChild(div3);
+
+
+
+
+// Create three additional divs
+let div1 = document.createElement('div');
+div1.style.width = '1rem';
+div1.style.height = '35%';
+div1.style.position = 'absolute';
+div1.style.bottom = '-4';
+div1.style.left = '40%';
+div1.style.borderRadius = '50%';
+div1.style.background = '#60a5fa';
+div1.style.marginTop = '40%'
+
+smallPic1.appendChild(div1);
+
+
+
 UserProfile.appendChild(smallPic);
-
-
-let smallImg = document.createElement('img');
-// smallImg.src = '';
-smallImg.style.width = '100%';
-smallImg.style.height = '100%';
-smallImg.style.objectFit = 'cover';
-smallImg.style.borderRadius = '50%';
-smallImg.id = 'smallImg';
-smallPic.appendChild(smallImg);
-
-
 const user = auth.currentUser;
 
 if (user) {
@@ -170,7 +211,7 @@ textArea.style.outline = 'none';
 textArea.id = 'TextArea';
 textArea.style.marginTop = '10px';
 textArea.style.width = '100%';
-textArea.style.height = '67%';
+textArea.style.height = '60%';
 textArea.readOnly = true; 
 textArea.style.textTransform = 'capitalize';
 mainContentDiv.appendChild(textArea)
