@@ -142,7 +142,6 @@ if (user) {
   const profilePicUrl =  await getDownloadURL(profilePicRef);
 
   largeImg.src = profilePicUrl;
-  smallImg.src = profilePicUrl
 } else {
   console.log('User is not logged in');
 }
