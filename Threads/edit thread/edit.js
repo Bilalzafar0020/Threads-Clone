@@ -115,7 +115,7 @@ if(user) {
 }
 
 else{
-    showAlert('You need to be logged in to post');
+    showAlert('You need to be login to post');
 }
 
 
