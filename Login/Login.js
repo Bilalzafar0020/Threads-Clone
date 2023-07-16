@@ -114,7 +114,7 @@ onAuthStateChanged(auth, async (user) => {
 let profilePicURL = '../../Assets/3d-render-cartoon-avatar-isolated_570939-71.jpg'; // Default profile picture URL
 
 if (user.photoURL || user.providerData[0].photoURL) {
-  // Use the user's provided profile picture
+  // Useing  the user's provided profile picture
   profilePicURL = user.photoURL || user.providerData[0].photoURL;
 }
 

@@ -85,6 +85,12 @@ textarea.style.lineHeight = '1.7'
 
 if(user) {
 
+  if(textarea.value.trim() === '' ){
+    showAlert('Please enter some content to post');
+    return // it will not play the function anymore i mean add data to database
+  }
+
+
     let inputData = {
         content: textarea.value,
          time: serverTimestamp()
