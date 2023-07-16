@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
 import { getFirestore, collection, addDoc,getDocs,onSnapshot,doc,updateDoc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
-import { getAuth,signOut } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+import { getAuth,signOut,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
   
 const firebaseConfig = {
@@ -19,7 +19,7 @@ const firebaseConfig = {
   const db = getFirestore(app);
 
 // alert message 
-function showAlert(message, type) {
+function showAlert(message) {
   const alertContainer = document.getElementById('alertContainer');
 
   const alert = document.createElement('div');
@@ -29,11 +29,8 @@ function showAlert(message, type) {
   alertContainer.appendChild(alert);
 
   setTimeout(() => {
-    alert.classList.add('hide');
-    setTimeout(() => {
-      alert.remove();
-    }, 500);
-  }, 4000);
+    alert.remove();
+  }, 2000);
 }
 
 // Sticky alert   (help from chatgpt so that alert should be responsive)
@@ -82,8 +79,11 @@ textarea.style.lineHeight = '1.7'
   });
 
 
-
   postButton.addEventListener('click', ()=>{
+
+   let user = auth.currentUser;
+
+if(user) {
 
     let inputData = {
         content: textarea.value,
@@ -93,14 +93,26 @@ textarea.style.lineHeight = '1.7'
   addDoc(collection(db, "post"),inputData)
   .then(() => {
 
-    setTimeout( alert('Posting...') , 4000)
-     
+    showAlert('Posting...');
+  
+    setTimeout(() => {
+      showAlert('Posted');
+      setTimeout(() => {
+        window.location.href = '../Threads.html';
+      }, 1000); // for alert
+    }, 1000);  // for redirection
 
-    window.location.href = '../Threads.html';
   })
   .catch((error) => {
     console.log(error);
   })
+}
+
+else{
+    showAlert('You need to be logged in to post');
+}
+
+
 
 })
 

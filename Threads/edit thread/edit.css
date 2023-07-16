@@ -164,9 +164,25 @@ h2.StartH2{
     text-transform: capitalize;   
 }
 
+/*    alert css   */ 
 
-
-
+.alert {
+    position: fixed;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 25%;
+    padding: 10px;
+    background-color: #ffffff;
+    color: #000000;
+    font-weight: lighter;
+    text-align: center;
+    transition: opacity 0.5s;
+    border-radius: 5px;
+    z-index: 9999;
+    font-size: 24px;
+  }
+  
 
 
 

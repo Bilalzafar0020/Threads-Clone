@@ -57,7 +57,6 @@ UserProfile.appendChild(largePic);
 
 
 let largeImg = document.createElement('img');
-// largeImg.src = '../../Assets/IMG-20210924-WA0002.jpg';
 largeImg.style.width = '100%';
 largeImg.style.height = '100%';
 largeImg.style.objectFit = 'cover';
