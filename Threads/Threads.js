@@ -183,13 +183,48 @@ userName.classList.add('userName'); // because we can not access the id directy
 
 posterDiv.appendChild(userName);
 
+// The toDate() method is used to convert a Firestore Timestamp object to a JavaScript Date object
+
+const postTime = postData.time.toDate(); //  postData.time is a Firestore Timestamp
+const currentTime = new Date();
+const timeDiff = currentTime - postTime;
+
+// Function to format the time for human readable
+const formatTimeDiff = (milliseconds) => {
+  const seconds = Math.floor(milliseconds / 1000); // This line calculates the number of seconds by dividing the milliseconds by 1000 and rounding down using the Math.floor function.
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+  const months = Math.floor(days / 30);
+  const years = Math.floor(months / 12);
+
+// we are using Math.floor so that the unit should not be in decimal 
+
+  if (years > 0) {
+    return `${years}year${years > 1 ? 's' : ''}`;
+  } else if (months > 0) {
+//      return `${months} month${months > 1 ? 's' : ''} ago`;
+    const currentDate = new Date();
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const monthName = monthNames[currentDate.getMonth()]; //  months are zero-indexed
+    return `${monthName} ${currentDate.getDate()}`; 
+    
+  } else if (days > 0) {
+    return `${days}d`;
+  } else if (hours > 0) {
+    return `${hours}h`;  // ${hours > 1 ? 'rs' : ''}
+  } else if (minutes > 0) {
+    return `${minutes}m `;
+  } else {
+    return `now`;
+  }
+};
 
 
 let time = document.createElement('h2');
-time.innerHTML = '3m';
+time.innerHTML = formatTimeDiff(timeDiff);
 time.style.color = '#bbb7b7';
 time.style.fontWeight = 'lighter';
-time.style.textTransform = 'capitalize';
 time.id = 'time';
 time.style.fontSize = '20px';
 posterDiv.appendChild(time);

@@ -110,7 +110,10 @@ if(user) {
 
   })
   .catch((error) => {
-    console.log(error);
+
+    setTimeout( showAlert(`You have'nt log-in/log-out yourself from this app.please login again to add post`)
+    , 9000);
+
   })
 }
 
