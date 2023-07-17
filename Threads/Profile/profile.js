@@ -17,8 +17,6 @@ const firebaseConfig = {
   const auth = getAuth(app);
 
 
-
-
 // alert message 
 function showAlert(message) {
   const alertContainer = document.getElementById('alertContainer');
@@ -112,6 +110,132 @@ setTimeout( ()=>{ alertContainer.style.display  = 'none' },9000);
 
 
 })
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////  if user logout than what to do  //////////////////////////
+
+
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    document.getElementById('mainContent').style.display = 'block';
+    document.getElementById('logo').style.display = 'flex';
+  } else {
+    document.getElementById('mainContent').style.display = 'none';
+    document.getElementById('logo').style.display = 'none';
+  }
+});
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////  profile edit  //////////////////////////
+
+
+let edit = document.getElementById('edit');
+
+edit.addEventListener('click', ()=>{
+
+  Swal.fire({
+    title: 'Edit Profile',
+    html: 
+'<input id="swal-input1" class="swal2-input" style="width: 400px;" maxLength = 50; placeholder="Enter your bio e:g Web develpoer etc" ;>' +
+      '<input id="swal-input2" class="swal2-input" placeholder="Enter your social media link " maxLength = 40;>' +
+      '<input id="swal-input3" class="swal2-input" placeholder="Enter your social media link" maxLength = 40;>' +
+      '<input id="swal-input4" class="swal2-input" placeholder="Enter your social media link" maxLength = 40;>' ,
+      focusConfirm: false,
+      showCancelButton: true,
+      confirmButtonColor: "#2ded27",
+      confirmButtonText: "Done",
+      cancelButtonText: "Cancel",
+      preConfirm: () => {
+        const label = document.getElementById('swal-input1').value;
+        const option1 = document.getElementById('swal-input2').value;
+        const option2 = document.getElementById('swal-input3').value;
+        const option3 = document.getElementById('swal-input4').value;
+    
+        if (!label || !option1 || !option2 || !option3 ) {
+          Swal.showValidationMessage('Please fill in all the fields');
+          return false;
+        }
+
+let profileData = {
+  bio: label,
+  linkOne : option1,
+  linktwo : option2,
+  linkthree : option3,
+}
+
+localStorage.setItem('Editprofile', JSON.stringify(profileData));
+
+
+        //  this is Updating the UI immediately after saving to local storage
+        retriveFromlocalstorage();
+
+      }
+      
+    })
+
+});
+
+let retriveFromlocalstorage = function(){
+let getData = JSON.parse(localStorage.getItem('Editprofile'));
+
+let bio = getData.bio;
+let linkfirst = getData.linkOne;
+let linksecond = getData.linktwo;
+let linkthird = getData.linkthree;
+
+
+
+document.getElementById('bio').innerHTML = bio;
+
+document.getElementById('link1').innerHTML = linkfirst;
+document.getElementById('link2').innerHTML = linksecond;
+document.getElementById('link3').innerHTML = linkthird;
+
+};
+
+// so that every time call when page refresh/Domcontentloaded
+retriveFromlocalstorage()
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////  links redirection which they type   //////////////////////////
+
+// Function to handle the click event
+function handleLinkClick(linkId) {
+  
+  const linkElement = document.getElementById(linkId);
+  const linkText = linkElement.textContent.trim();
+  const fullLink =  linkText;
+
+  window.location.href = fullLink;
+}
+
+
+
+document.getElementById('link1').addEventListener('click', ()=>{
+  handleLinkClick('link1');
+})
+
+
+
+document.getElementById('link2').addEventListener('click', ()=>{
+  handleLinkClick('link2');
+})
+
+document.getElementById('link3').addEventListener('click', ()=>{
+  handleLinkClick('link3');
+})
+
+
 
 
 

@@ -149,11 +149,17 @@ h3.link2,
 h3.link3{
   font: 14px;
   letter-spacing: 1px;
-  text-transform: capitalize;
+  text-transform:inherit;
   color: #0670e9;
   cursor: pointer;
   font-weight: lighter;
 }
+/* h3.link1:hover ,
+h3.link2:hover,
+h3.link3:hover{
+ transform: scale(1.3);
+} */
+
 
 
 div.buttons{
@@ -163,8 +169,6 @@ div.buttons{
   margin-top: 40px ;
   width: 100%;
 }
-
-
 button.edit{
   border-color: #737373;
   width: 11rem;
@@ -178,6 +182,9 @@ button.edit{
   font-size: 18px;
   cursor: pointer;
   border-style: double;
+}
+button.edit:hover{
+  background-color: #1f1e1e;
 }
 
 button.logout{
@@ -193,6 +200,9 @@ button.logout{
   font-size: 18px;
   cursor: pointer;
   border-style: double;
+}
+button.logout:hover{
+  background-color: #1f1e1e;
 }
 
 
