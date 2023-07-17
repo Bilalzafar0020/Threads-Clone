@@ -166,14 +166,36 @@ div.buttons{
 
 
 button.edit{
-  border-color: #737373 #737373 #737373 #737373;
-  /* outline: #737373; */
+  border-color: #737373;
   width: 11rem;
   padding: 10px;
   height: 2.5rem;
   background-color: #000000;
   color: #ffffff;
+  border-radius: 0.75rem;
+  border-width: 1px;
+  font-weight: 500;
+  font-size: 18px;
+  cursor: pointer;
+  border-style: double;
 }
+
+button.logout{
+  border-color: #737373;
+  width: 11rem;
+  padding: 10px;
+  height: 2.5rem;
+  background-color: #000000;
+  color: #ffffff;
+  border-radius: 0.75rem;
+  border-width: 1px;
+  font-weight: 500;
+  font-size: 18px;
+  cursor: pointer;
+  border-style: double;
+}
+
+
 
   /*  home,edit,profile area */
 div.footer{
@@ -196,3 +218,22 @@ div.mainFooter{
    width: 100%;
 }
 
+
+/*    alert css   */ 
+
+.alert {
+  position: fixed;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 25%;
+  padding: 10px;
+  background-color: #ffffff;
+  color: #000000;
+  font-weight: lighter;
+  text-align: center;
+  transition: opacity 0.5s;
+  border-radius: 5px;
+  z-index: 9999;
+  font-size: 24px;
+}
