@@ -184,6 +184,17 @@ localStorage.setItem('Editprofile', JSON.stringify(profileData));
 let retriveFromlocalstorage = function(){
 let getData = JSON.parse(localStorage.getItem('Editprofile'));
 
+if (!getData || typeof getData.bio !== 'string' || typeof getData.linkOne !== 'string' || typeof getData.linktwo !== 'string' || typeof getData.linkthree !== 'string') {
+  
+  getData = {
+    bio: ' Web Developer / Data Analyst / freelancer / Ai enginner',
+    linkOne: 'https://github.com/Bilalzafar0020',
+    linktwo: 'https://github.com/Bilalzafar0020',
+    linkthree: 'https://github.com/Bilalzafar0020',
+  };
+}
+
+
 let bio = getData.bio;
 let linkfirst = getData.linkOne;
 let linksecond = getData.linktwo;
@@ -234,8 +245,3 @@ document.getElementById('link2').addEventListener('click', ()=>{
 document.getElementById('link3').addEventListener('click', ()=>{
   handleLinkClick('link3');
 })
-
-
-
-
-
