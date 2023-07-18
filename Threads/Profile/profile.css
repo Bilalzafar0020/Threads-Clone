@@ -64,7 +64,7 @@ div.logo{
 /*  post area */
 div.content {
     margin-top: 10px;
-    min-height: calc(100vh - 3.4rem - 8px); /* Subtracting the footer and logo height from viewport height(the remaining height will be the height of the div.content */
+    min-height: calc(90vh - 3.4rem - 8px); /* Subtracting the footer and logo height from viewport height(the remaining height will be the height of the div.content */
   width: 100%;
   }
 
@@ -147,7 +147,6 @@ outline: none;
 h3.link1,
 h3.link2,
 h3.link3{
-  font: 14px;
   letter-spacing: 1px;
   text-transform:inherit;
   color: #0670e9;
@@ -246,4 +245,252 @@ div.mainFooter{
   border-radius: 5px;
   z-index: 9999;
   font-size: 24px;
+}
+
+@media all and (max-width:1249px)  and (min-width:943px){
+  div.secondMain {
+    width: 60%;
+}
+h1.name {
+  font-size: 32px;
+  letter-spacing: 1.2px;
+}
+div.threadnet h3.one {
+  font-size: 19px;
+  letter-spacing: 1.2px;
+}
+}
+@media all and (max-width:943px)  and (min-width:751px){
+  div.secondMain {
+    width: 70%;
+}
+h1.name {
+  font-size: 28px;
+  letter-spacing: 1.2px;
+}
+div.threadnet h3.one {
+  font-size: 17px;
+  letter-spacing: 1.2px;
+}
+div.profileimg {
+  width: 5.5rem;
+  height: 5.5rem;
+}
+
+}
+@media all and (max-width:751px)  and (min-width:542px){
+  div.secondMain {
+    width: 80%;
+}
+h1.name {
+  font-size: 22px;
+  letter-spacing: 1.1px;
+}
+div.threadnet h3.one {
+  font-size: 14px;
+  letter-spacing: 1.2px;
+}
+div.profileimg {
+  width: 5.1rem;
+  height: 5.1rem;
+}
+div.raduis {
+  padding-left: 0.7rem;
+  padding-right: 0.7rem;
+  height: 17px;
+}
+h3.threadsnet {
+  font-size: 15px;
+}
+textarea#bio {
+  font-size: 16px;
+}
+h3.link1,
+  h3.link2,
+  h3.link3 {
+    font-size: 16.2px; 
+  }
+}
+
+@media all and (max-width:542px)  and (min-width:468px){
+  div.secondMain {
+    width: 90%;
+}
+h1.name {
+  font-size: 21px;
+  letter-spacing: 1.1px;
+}
+div.threadnet h3.one {
+  font-size: 11px;
+  letter-spacing: 1.1px;
+}
+div.profileimg {
+  width: 4.8rem;
+  height: 4.8rem;
+}
+div.raduis {
+  padding-left: 0.7rem;
+  padding-right: 0.7rem;
+  height: 14px;
+}
+h3.threadsnet {
+  font-size: 15px;
+}
+textarea#bio {
+  font-size: 14px;
+}
+
+h3.link1 {
+  font: 12px;
+}
+h3.link2 {
+  font: 12px;
+}
+h3.link3 {
+  font: 12px;}
+
+  button.edit {
+    width: 9rem;
+  }
+button.logout{
+  width: 9rem;
+}
+h3.link1,
+  h3.link2,
+  h3.link3 {
+    font-size: 14.2px; 
+  }
+}
+
+
+@media all and (max-width:468px)  and (min-width:381px){
+  div.secondMain {
+    width: 95%;
+}
+h1.name {
+  font-size: 19px;
+  letter-spacing: 1.1px;
+}
+div.threadnet h3.one {
+  font-size: 10px;
+  letter-spacing: 1.1px;
+}
+div.profileimg {
+  width: 4.5rem;
+  height: 4.5rem;
+}
+div.raduis {
+  padding-left: 0.7rem;
+  padding-right: 0.7rem;
+  height: 12px;
+}
+h3.threadsnet {
+  font-size: 13px;
+}
+textarea#bio {
+  font-size: 10px;
+}
+
+  button.edit {
+    width: 7.5rem;
+  }
+button.logout{
+  width: 7.5rem;
+}
+h3.link1,
+  h3.link2,
+  h3.link3 {
+    font-size: 13.2px; 
+  }
+}
+
+@media all and (max-width: 381px) and (min-width: 347px) {
+  div.secondMain {
+    width: 97%;
+  }
+  h1.name {
+    font-size: 14px;
+    letter-spacing: 1.1px;
+  }
+  div.threadnet h3.one {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+  div.profileimg {
+    width: 2.8rem;
+    height: 2.8rem;
+  }
+  div.raduis {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    height: 12px;
+  }
+  h3.threadsnet {
+    font-size: 10px;
+  }
+  textarea#bio {
+    font-size: 8px;
+  }
+  button.edit {
+    width: 6rem;
+    font-size: 12px;
+  }
+  button.logout {
+    width: 6rem;
+    font-size: 12px;
+  }
+  h3.link1,
+  h3.link2,
+  h3.link3 {
+    font-size: 11.2px;
+  }
+}
+
+
+@media all and (max-width: 381px) and (min-width: 320px) {
+  div.profileimg {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+  div.secondMain {
+    width: 97%;
+  }
+  h1.name {
+    font-size: 14px;
+    letter-spacing: 1.1px;
+  }
+  div.threadnet h3.one {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+  div.raduis {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    height: 12px;
+  }
+  h3.threadsnet {
+    font-size: 10px;
+  }
+  textarea#bio {
+    font-size: 8px;
+  }
+  button.edit {
+    width: 6rem;
+    font-size: 12px;
+  }
+  button.logout {
+    width: 6rem;
+    font-size: 12px;
+  }
+  h3.link1,
+  h3.link2,
+  h3.link3 {
+    font-size: 11.2px;
+  }
+}
+@media all and (max-width: 341px) and (min-width: 320px) {
+  div.profileimg {
+    width: 2rem;
+    height: 2rem;
+  }
 }
