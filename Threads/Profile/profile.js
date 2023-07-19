@@ -77,8 +77,8 @@ if ( profilePictureURL.displayName) {
 }
 
 document.getElementById('profileimg').src = profilePicture;
-document.getElementById('name').innerHTML = name;
-document.getElementById('smallname').innerHTML = name;
+document.getElementById('name').textContent = name;
+document.getElementById('smallname').textContent = name;
 
 
 
@@ -202,11 +202,11 @@ let linkthird = getData.linkthree;
 
 
 
-document.getElementById('bio').innerHTML = bio;
+document.getElementById('bio').textContent = bio;
 
-document.getElementById('link1').innerHTML = linkfirst;
-document.getElementById('link2').innerHTML = linksecond;
-document.getElementById('link3').innerHTML = linkthird;
+document.getElementById('link1').textContent = linkfirst;
+document.getElementById('link2').textContent = linksecond;
+document.getElementById('link3').textContent = linkthird;
 
 };
 
