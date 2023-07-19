@@ -83,8 +83,7 @@ div.mainFooter{
    justify-content: space-between;
    align-items: center;
    width: 100%;
-}
-
+}  
 
 /* /////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -111,11 +110,155 @@ div.UserProfile{
   align-items: center;
   margin-bottom: 10px;
 }
+div.mainContentDiv{
+  margin-left: 20px;
+}
+textarea#TextArea.textArea{
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  line-height: 1.5;
+  height: 60%;
+}
+
+h1.userName{
+  font-size: 23px;
+  letter-spacing: 1px;
+}
+h2#time{
+  font-size: 20px;
+}
+/* //////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////    Media query  */
+
+@media all and (max-width:1236px) and (min-width:1120px) {
+  div.secondMain{
+    width: 55%;
+}
+}
+@media all and (max-width:1120px) and (min-width:1023px) {
+  div.secondMain{
+    width: 60%;
+}
+textarea#TextArea.textArea{
+  letter-spacing: 1.3px;
+    font-size: 15px;
+    height: 60%;
+}
+}
+
+@media all and (max-width:1023px) and (min-width:883px) {
+  div.secondMain{
+    width: 65%;
+}
+textarea#TextArea.textArea{
+  letter-spacing: 1.3px;
+    font-size: 14.5px;
+    height: 60%;
+    line-height: 1.6;
+}
+}
+ 
+@media all and (max-width:883px) and (min-width:704px) {
+  div.secondMain{
+    width: 70%;
+    scroll-behavior: smooth;
+}
+textarea#TextArea.textArea{
+  letter-spacing: 1.3px;
+    font-size: 14px;
+    line-height: 1.5;
+    height: 60%;
+}
+div.mainContentDiv{
+ margin-left: 10px; 
+}
+}
+@media all and (max-width:704px) and (min-width:535px) {
+  div.secondMain{
+    width: 80%;
+    scroll-behavior: smooth;
+}
+textarea#TextArea.textArea{
+  letter-spacing: 1.3px;
+    font-size: 13px;
+    line-height: 1.4;
+}
+div.mainContentDiv{
+ margin-left: 12px; 
+}
+}
+
+@media all and (max-width:535px) and (min-width:447px) {
+  div.secondMain{
+    width: 90%;
+    scroll-behavior: smooth;
+}
+textarea#TextArea.textArea{
+  letter-spacing: 1.2px;
+    font-size: 13.3px;
+    line-height: 1.2;
+    height: 55%;
+}
+div.mainContentDiv{
+ margin-left: 5px; 
+}
+h1.userName{
+  font-size: 20px;
+  letter-spacing: 0.6px;
+}
+h2#time{
+  font-size: 18px;
+}
+}
 
 
+@media all and (max-width:447px) and (min-width:373px) {
+  div.secondMain{
+    width: 95%;
+    scroll-behavior: smooth;
+}
+textarea#TextArea.textArea{
+  letter-spacing: 1px;
+    font-size: 11.5px;
+    line-height: 1.4;
+    height: 60%;
+}
+div.mainContentDiv{
+ margin-left: 2px; 
+}
+h1.userName{
+  font-size: 17px;
+  letter-spacing: 0.5px;
+}
+h2#time{
+  font-size: 15px;
+}
+}
 
 
-
+@media all and (max-width:373px) and (min-width:320px) {
+  div.secondMain{
+    width: 96%;
+    scroll-behavior: smooth;
+}
+textarea#TextArea.textArea{
+  letter-spacing: 1px;
+    font-size: 11.5px;
+    line-height: 1.3;
+    height: 62%;
+}
+div.mainContentDiv{
+ margin-left: -3px; 
+}
+h1.userName{
+  font-size: 14px;
+  letter-spacing: 0.4px;
+}
+h2#time{
+  font-size: 13.5px;
+}
+}
 
 
 

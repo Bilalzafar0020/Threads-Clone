@@ -149,8 +149,8 @@ if (user) {
 // content area
 
 let mainContentDiv = document.createElement('div');
-mainContentDiv.style.marginLeft ='20px';
 mainContentDiv.style.width = '100%';
+mainContentDiv.classList.add('mainContentDiv');
 mainPost.appendChild(mainContentDiv);
 
 
@@ -164,8 +164,6 @@ mainContentDiv.appendChild(posterDiv);
 
 
 let userName = document.createElement('h1');
-userName.style.letterSpacing = '1px';
-userName.style.fontSize = '23px';
 userName.style.color = '#f7ffff';
 userName.style.fontWeight = 'lighter';
 userName.style.textTransform = 'capitalize';
@@ -226,7 +224,6 @@ time.innerHTML = formatTimeDiff(timeDiff);
 time.style.color = '#bbb7b7';
 time.style.fontWeight = 'lighter';
 time.id = 'time';
-time.style.fontSize = '20px';
 posterDiv.appendChild(time);
 
 
@@ -234,20 +231,18 @@ posterDiv.appendChild(time);
 let textArea = document.createElement('textarea');
 textArea.innerText = postData.content;
 //postData.content
-textArea.style.letterSpacing = '1.5px';
-textArea.style.fontSize = '16px';
 textArea.style.color = '#f7ffff';
 textArea.style.fontWeight = 'lighter';
-textArea.style.lineHeight = '1.5';
 textArea.style.background = '#000000';
 textArea.style.border = 'none';
 textArea.style.outline = 'none';
 textArea.id = 'TextArea';
 textArea.style.marginTop = '10px';
 textArea.style.width = '100%';
-textArea.style.height = '60%';
 textArea.readOnly = true; 
 textArea.style.textTransform = 'capitalize';
+textArea.style.overflow = 'hidden';
+textArea.classList.add('textArea'); 
 mainContentDiv.appendChild(textArea)
 
 
@@ -322,6 +317,44 @@ const unsubscribe = onSnapshot(pollsCollectionRef, (snapshot) => {
 
 
 
+
+///////////////////////// for the responsiveness of styles which we have created dynamically on elemnets inline 
+
+/*
+
+(1) method
+// Function to apply media query styles
+function applyMediaQueryStyles() {
+  if (window.innerWidth >= 328 && window.innerWidth <= 878) {
+    textArea.style.letterSpacing = '1px';
+    textArea.style.fontSize = '13px';
+    textArea.style.lineHeight = '1.3';
+    mainContentDiv.style.marginLeft = '14px';
+  } else {
+    // Reset styles if not within the media query range
+    textArea.style.letterSpacing = '';
+    textArea.style.fontSize = '';
+    textArea.style.lineHeight = '';
+    mainContentDiv.style.marginLeft = '';
+  }
+}
+
+// Call the function when the page loads and whenever the window is resized
+window.addEventListener('load', applyMediaQueryStyles);
+window.addEventListener('resize', applyMediaQueryStyles);
+
+
+(2)  method 
+
+by using style which you did not want to use in media query make it dynamcially but on which you want
+first make it in a css then apply media query their 
+
+(3) Method  
+
+ use setprperty()
+
+
+*/
 
 
 

@@ -58,7 +58,7 @@ if (alert) {
 
      let placeholder = document.getElementById('StartH2');
 
-  const maxCharacters = 391;  // 415 
+  const maxCharacters = 350;  // 415 
   
   textarea.addEventListener('input', () => {
     //  for text lenght
