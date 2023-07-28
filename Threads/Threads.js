@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-import { getFirestore, collection, addDoc,getDocs,onSnapshot,doc,updateDoc, serverTimestamp, query, orderBy} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc,getDocs,onSnapshot,doc,updateDoc, serverTimestamp, query, orderBy,deleteDoc,getDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 import { getAuth,signOut,onAuthStateChanged  } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 import { getStorage, ref, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-storage.js";
 
@@ -21,6 +21,53 @@ const firebaseConfig = {
   const storage = getStorage(app);
 
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////        Alert    message                //////////////////////////
+
+function showAlert(message) {
+  const alertContainer = document.getElementById('alertContainer');
+
+  const alert = document.createElement('div');
+  alert.classList.add('alert');
+  alert.textContent = message;
+
+  alertContainer.appendChild(alert);
+
+  setTimeout(() => {
+    alert.remove();
+  }, 2000);
+}
+
+// Sticky alert   
+window.addEventListener('scroll', function () {
+const alertContainer = document.getElementById('alertContainer');
+const alert = alertContainer.querySelector('.alert');
+if (alert) {
+  const alertHeight = alert.offsetHeight;
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+  const windowBottom = scrollTop + windowHeight;
+
+  if (windowBottom > alertContainer.offsetTop + alertHeight) {
+    alert.classList.add('sticky');
+  } else {
+    alert.classList.remove('sticky');
+  }
+}
+});
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////    getting whole data from firbase   + creating dynacmmically posts               //////////////////////////
+
+
+
   let mainDiv = document.getElementById('mainContent');
 
 
@@ -32,15 +79,22 @@ let retrieveData = async function() {
     // querySnapshot.forEach((docm) => {  first this was like that but for storge we did it
     const postData = docm.data();
     const postId = docm.id;
-
+    const userId = postData.userId;
+    const username = postData.userName;
+    const userProfilePic = postData.userProfilePic;
 
  let mainPost = document.createElement('div');
-mainPost.style.width = '100%'; //90%
+mainPost.style.width = '100%'; 
 mainPost.classList.add('mainPost')
 
 mainDiv.appendChild(mainPost)
 
-// pics area
+   
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////  pic area  //////////////////////////
+
 let UserProfile = document.createElement('div');
 UserProfile.classList.add('UserProfile')
 mainPost.appendChild(UserProfile)
@@ -52,7 +106,6 @@ largePic.style.width = '3.5rem';
 largePic.style.height = '3.5rem';
 largePic.style.background = '#4c4c4c';
 largePic.style.borderRadius = '50%';
-// largePic.style.overflow = 'hidden';
 UserProfile.appendChild(largePic);
 
 
@@ -62,6 +115,7 @@ largeImg.style.height = '100%';
 largeImg.style.objectFit = 'cover';
 largeImg.style.borderRadius = '50%';
 largeImg.id = 'largeImg';
+largeImg.src = userProfilePic; 
 largePic.appendChild(largeImg);
 
 
@@ -77,7 +131,6 @@ UserProfile.appendChild(line);
 let smallPic = document.createElement('div');
 smallPic.style.width = '4.5rem';
 smallPic.style.height = '3rem';
-// smallPic.style.background  = '#4c4c4c';
 smallPic.style.position = 'relative';
 smallPic.style.borderRadius = '50%';
 
@@ -85,8 +138,6 @@ smallPic.style.borderRadius = '50%';
 let smallPic1 = document.createElement('div');
 smallPic1.style.width = '4.5rem';
 smallPic.style.height = '3rem';
-// smallPic.style.background  = '#4c4c4c';
-// smallPic.style.position = 'relative';
 smallPic1.style.borderRadius = '50%';
 smallPic.appendChild(smallPic1);
 
@@ -111,7 +162,6 @@ div3.style.left = '15%';
 div3.style.bottom = '10%'
 div3.style.borderRadius = '50%';
 div3.style.marginBottom = '15%'
-// div3.style.transform = 'translateX(-50%)';
 smallPic1.appendChild(div3);
 
 
@@ -133,20 +183,27 @@ smallPic1.appendChild(div1);
 
 
 UserProfile.appendChild(smallPic);
-const user = auth.currentUser;
+// const user = auth.currentUser;
 
-if (user) {
-  const userId = user.uid; //  the user's UID
+// if (user) {
+//   const userId = user.uid; //  the user's UID
 
-  const profilePicRef = ref(storage, `profile_pictures/${userId}`);
-  const profilePicUrl =  await getDownloadURL(profilePicRef);
+//   const profilePicRef = ref(storage, `profile_pictures/${userId}`);
+//   const profilePicUrl =  await getDownloadURL(profilePicRef);
 
-  largeImg.src = profilePicUrl;
-} else {
-  console.log('User is not logged in');
-}
+//   largeImg.src = profilePicUrl;
+// } else {
+//   console.log('User is not logged in');
+// }
 
-// content area
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////  content  area  //////////////////////////
+
 
 let mainContentDiv = document.createElement('div');
 mainContentDiv.style.width = '100%';
@@ -167,19 +224,27 @@ let userName = document.createElement('h1');
 userName.style.color = '#f7ffff';
 userName.style.fontWeight = 'lighter';
 userName.style.textTransform = 'capitalize';
-userName.classList.add('userName'); // because we can not access the id directy 
+userName.innerHTML = `${username}<img src="../Assets/blue1.png" style="width: 20px; height: 20px;border-radius:999px ">`;
+userName.classList.add('userName'); 
 
 
 // const user = auth.currentUser;
-    if (user) {
-      const profile = {
-        displayName: user.displayName || user.providerData[0].displayName || user.email,
-      };
-      userName.innerHTML = `${profile.displayName}<img src="../Assets/blue1.png" style="width: 20px; height: 20px;border-radius:999px ">`;
-    }
+    // if (user) {
+    //   const profile = {
+    //     displayName: user.displayName || user.providerData[0].displayName || user.email,
+    //   };
+    //   userName.innerHTML = `${profile.displayName}<img src="../Assets/blue1.png" style="width: 20px; height: 20px;border-radius:999px ">`;
+    // }
 
 
 posterDiv.appendChild(userName);
+
+
+
+let secondposterDiv = document.createElement('div');
+secondposterDiv.classList.add('secondposterDiv');
+posterDiv.appendChild(secondposterDiv)
+
 
 // The toDate() method is used to convert a Firestore Timestamp object to a JavaScript Date object
 
@@ -187,7 +252,12 @@ const postTime = postData.time.toDate(); //  postData.time is a Firestore Timest
 const currentTime = new Date();
 const timeDiff = currentTime - postTime;
 
-// Function to format the time for human readable
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// function to format the time to human readable  //////////////////////////
+
 const formatTimeDiff = (milliseconds) => {
   const seconds = Math.floor(milliseconds / 1000); // This line calculates the number of seconds by dividing the milliseconds by 1000 and rounding down using the Math.floor function.
   const minutes = Math.floor(seconds / 60);
@@ -224,7 +294,135 @@ time.innerHTML = formatTimeDiff(timeDiff);
 time.style.color = '#bbb7b7';
 time.style.fontWeight = 'lighter';
 time.id = 'time';
-posterDiv.appendChild(time);
+secondposterDiv.appendChild(time);
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////  the bootsrap dropdown  //////////////////////////
+
+let dropdownContainer = document.createElement('div');
+dropdownContainer.classList.add('dropdown');
+
+let dropdownButton = document.createElement('button');
+dropdownButton.classList.add('three-dots-trigger'); 
+dropdownButton.setAttribute('type', 'button');
+dropdownButton.setAttribute('data-bs-toggle', 'dropdown');
+dropdownButton.setAttribute('aria-expanded', 'false');
+dropdownButton.style.color = 'white';
+dropdownButton.innerHTML = '&#8230;'; 
+
+dropdownContainer.appendChild(dropdownButton);
+
+
+
+let dropdownMenu = document.createElement('ul');
+dropdownMenu.classList.add('dropdown-menu');
+
+let deleteAllButton = document.createElement('li');
+deleteAllButton.classList.add('list');
+let deleteAllLink = document.createElement('a');
+deleteAllLink.classList.add('drop-down-options');
+deleteAllLink.setAttribute('type', 'button');
+deleteAllLink.innerHTML = 'Delete Post';
+deleteAllButton.appendChild(deleteAllLink);
+dropdownMenu.appendChild(deleteAllButton);
+
+let icon = document.createElement('img');
+icon.style.color = 'red';
+icon.style.width = '20px';
+icon.style.height = '15px';
+icon.src = '../Assets/trash-2.svg';
+deleteAllButton.appendChild(icon)
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////       Function to delete a post of the user who created it only             //////////////////////////
+
+const deletePost = async (postId1) => {
+  try {
+    //  the current user
+    const user = auth.currentUser;
+
+    // Checking if the user is logged in
+    if (user) {
+      const postRef = doc(db, "post", postId1);
+      const docSnapshot = await getDoc(postRef);   // getDoc to get the document referance
+
+      // Checking if the post exists
+      if (docSnapshot.exists()) {
+        const postData = docSnapshot.data();
+
+        //  if the current user is the owner of the post
+        if (postData.userId === user.uid) {
+
+
+          // Deleteing the post
+          await deleteDoc(postRef);
+          
+          showAlert('Post deleted successfully! \u{1F600}'); // unicode corrector 
+
+        } 
+        
+        else {
+
+          showAlert('Only post owner can delete his post');
+        
+        }
+
+      } 
+      else {
+        showAlert('Post does not exist.');
+      }
+
+    } 
+
+    else {
+      showAlert('User is not logged in')
+    }
+
+
+  } 
+  catch (error) {
+
+    showAlert('Error deleting post : ');
+
+  }
+
+
+};
+
+
+
+deleteAllButton.addEventListener("click", () => {
+  const postId1 = postId;
+
+
+//  calling the function with the document id 
+  deletePost(postId1);
+});
+
+
+
+dropdownContainer.appendChild(dropdownMenu);
+
+
+secondposterDiv.appendChild(dropdownContainer);
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////  text area  //////////////////////////
 
 
 
@@ -241,7 +439,7 @@ textArea.style.marginTop = '10px';
 textArea.style.width = '100%';
 textArea.readOnly = true; 
 textArea.style.textTransform = 'capitalize';
-textArea.style.overflow = 'hidden';
+textArea.style.overflowY = 'auto';
 textArea.classList.add('textArea'); 
 mainContentDiv.appendChild(textArea)
 
@@ -304,7 +502,11 @@ return mainPost;  // for storage
 
 
 
-//  Firestore listener for real-time updates
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////  Firestore listener for real-time updates //////////////////////////
+ 
 const pollsCollectionRef = collection(db, "post");
 const unsubscribe = onSnapshot(pollsCollectionRef, (snapshot) => {
 

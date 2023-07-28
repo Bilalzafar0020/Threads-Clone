@@ -33,7 +33,7 @@ function showAlert(message) {
   }, 2000);
 }
 
-// Sticky alert   (help from chatgpt so that alert should be responsive)
+// Sticky alert   
 window.addEventListener('scroll', function () {
 const alertContainer = document.getElementById('alertContainer');
 const alert = alertContainer.querySelector('.alert');
@@ -90,10 +90,14 @@ if(user) {
     return // it will not play the function anymore i mean add data to database
   }
 
+  let defaultProfilePic = '../../Assets/3d-render-cartoon-avatar-isolated_570939-71.jpg'; 
 
     let inputData = {
         content: textarea.value,
-         time: serverTimestamp()
+         time: serverTimestamp(),
+         userId: user.uid, //  the user's UID along with the post data
+         userName: user.displayName || user.providerData[0].displayName || user.email,
+         userProfilePic: user.photoURL || defaultProfilePic,
       };
 
   addDoc(collection(db, "post"),inputData)
