@@ -5,69 +5,218 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Threads-WebAPP</title>
 <link rel="shortcut icon" href="./Assets/threads logo.png" type="image/x-icon">
-<link rel="stylesheet" href="./Login/Login.css">
+
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 <body>
+   
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&family=Lobster&family=Poppins:wght@400;500&family=Tsukimi+Rounded:wght@400;500&display=swap');
+
+
+*{
+    margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'IBM Plex Sans', sans-serif;
+font-family: 'Lobster', cursive;
+font-family: 'Poppins', sans-serif;
+font-family: 'Tsukimi Rounded', sans-serif;
+}
+body{
+    height: 100vh;
+    max-width: 100vw;
+    background: #303030;
+}
+::-webkit-scrollbar {
+    display: none;
+    scroll-behavior: smooth;
+}
+
+main.main{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.6rem;
+  height: 39rem;
+}
+
+div.extra{
+    width: 352px;
+    height: 100%;
+}
+
+div.logo1{
+    text-align: center;
+}
+div.logo{
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+
+div.text{
+    text-align: center;
+}
+
+h1{
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: 550;
+    letter-spacing: 1px;
+}
+
+h2.h21{
+    color: #f3f1f1;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: 0.7px;
+}
+
+h2.h22{
+    color: #f3f1f1;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+div.links{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 70px;
+    margin-top: 18px;
+}
+a.login{
+    background-color: #303030;
+    color: #2196f3;
+    text-decoration: none;
+    border: 2px solid  #494949;
+    border-radius: 5px;
+     width: 93px;
+     padding: 3px 10px;
+    font-size: 18px;
+    font-weight: 560;
+  text-align: center;
+}
+a.signup{
+    background-color: #303030;
+    color: #2196f3;
+    text-decoration: none;
+    border: 2px solid  #494949;
+    border-radius: 5px;
+     width: 93px;
+     padding: 3px 10px;
+    font-size: 18px;
+    font-weight: 560;
+  text-align: center;
+}
+
+img.welcome{
+    width: 350px;
+    height: 350px;
+}
+
+@media all and (max-width:388px) and (min-width:320px) {
     
+img.welcome{
+    width: 300px;
+    height: 300px;
+}
+h1{
+    font-size: 25px;
+    letter-spacing: 0.6px;
+}
+
+h2.h21{
+    font-size: 14px;
+    letter-spacing: 0.3px;
+}
+
+h2.h22{
+    font-size: 15px;
+    letter-spacing: 0.5px;
+}
+div.links{
+    gap: 40px;
+    margin-top: 18px;
+}
+a.login{
+     width: 93px;
+     padding: 3px 10px;
+    font-size: 18px;
+    font-weight: 560;
+  text-align: center;
+}
+a.signup{
+    background-color: #303030;
+    color: #2196f3;
+    text-decoration: none;
+    border: 2px solid  #494949;
+    border-radius: 5px;
+     width: 93px;
+     padding: 3px 10px;
+    font-size: 18px;
+    font-weight: 560;
+  text-align: center;
+}
+
+}
+
+
+    </style>
+
+
+
 <main class="main">
 
     <div class="extra">
+
+
+<div class="logo1">
+
+    <img src="./Assets/threads logo.png" 
+    width="80px" height="80px" class="image"> 
+</div>
+
+
+
 <div class="logo">
 
-   <img src="./Assets/1000_F_501903811_pA3IGrb7DgwZeFfb3WY5GxtjgVinOMpm-removebg-preview.png" 
-    width="170px" height="200px"> 
+   <img src="./Assets/welcome.png"  class="welcome"> 
 
 </div>
 
-    <div class="login">
+<div class="text">
 
-<h1 class="userL">User Login</h1>
+<h1 > Let's get started  </h1>
 
-<form id="loginForm">
+<h2 class="h21"> Their is just one option to login that is </h2>
 
-
-    <div class="email" >
-<img src="./Assets/person.svg" width="15px" height="13px" >
-<input type="text" required placeholder="Email Address" id="email"> </div> <br>
-
-<div class="password">
-<img src="./Assets/padlock.png" width="15px" height="13px"  >    
-<input type="password" required placeholder="Password" id="password">
-</div>
-<br>
-
-
-<button id="login">Login</button><br/>
-</form>
-
-
-<div class="signup">
-
-<h3 class="createaccount">Create an account</h3>
-<a href="./SignUP/SignUp.html" class="signupb">Signup now</a>
+<h2 class="h22">  Threads !  </h2>
 
 </div>
-<h3 class="or">OR</h3>
-<br>
 
 
- <button id="google" style="display: flex; align-items: center;">
-    <img src="./Assets/google.png" width="15px" height="15px" style="margin-right: 5px;">
-            <span style="margin-left: 8px;">Log in with Google</span>
-          </button>
-          
+
+<div class="links">
+
+    <a href="./Login/index.html" class="login"> Login </a>
+
+    <a href="./SignUP/SignUp.html" class="signup"> Signup </a>
+</div>
+
+
     </div>
-</div>
+
 </main>
 
 <!--  alert box div           -->
 <div id="alertContainer"></div>
-
-<!-- <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script> -->
 
 
 <script type="module" src="./Login/Login.js"></script>
